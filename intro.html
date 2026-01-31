@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Farmer Advisory System</title>
+    <style>
+        /* RESET & BASIC STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+            background-color: #f4f9f4;
+        }
+
+        /* HERO SECTION & BACKGROUND */
+        .hero-container {
+            position: relative; /* Needed for background absolute elements */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0f2f1 0%, #a5d6a7 100%);
+            padding: 20px;
+            overflow: hidden; /* Hide overflow of background animations */
+        }
+
+        /* --- SUBLTE BACKGROUND "AI CROP" ANIMATIONS --- */
+        .bg-shape {
+            position: absolute;
+            opacity: 0.15; /* Very subtle */
+            z-index: 0; /* Behind everything */
+            animation: floatAround infinite linear;
+        }
+
+        /* Representing data nodes or leaves */
+        .shape-1 {
+            width: 100px; height: 100px;
+            top: 10%; left: 10%;
+            background: #2e7d32;
+            border-radius: 50%;
+            animation-duration: 25s;
+        }
+        .shape-2 {
+            width: 150px; height: 150px;
+            bottom: 20%; right: 10%;
+            background: #1b5e20;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); /* Pentagon shape */
+            animation-duration: 35s;
+            animation-direction: reverse;
+        }
+        .shape-3 {
+            width: 80px; height: 80px;
+            top: 30%; right: 30%;
+            border: 5px solid #2e7d32;
+            border-radius: 50%;
+            animation-duration: 20s;
+             animation-delay: -5s;
+        }
+
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(40px, 60px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        /* ---------------------------------------------- */
+
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1; /* Ensure content is above background shapes */
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* TEXT CONTENT SIDE with Staggered Animation */
+        .text-section {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+        }
+
+        /* Hide initially for stagger effect */
+        .text-section h1, 
+        .text-section p, 
+        .text-section .cta-button-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUpFade 0.8s ease-out forwards;
+        }
+
+        .text-section h1 {
+            font-size: 3.5rem;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation-delay: 0.2s; /* 1st item to appear */
+        }
+
+        .text-section h1 span {
+            color: #1b5e20;
+            font-weight: 800;
+        }
+
+        .text-section p {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            max-width: 500px;
+            animation-delay: 0.4s; /* 2nd item to appear */
+        }
+
+        .cta-button-wrapper {
+             animation-delay: 0.6s; /* 3rd item to appear */
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 45px;
+            background-color: #2e7d32;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -10px rgba(46, 125, 50, 0.5);
+        }
+
+        .cta-button:hover {
+            background-color: #1b5e20;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(46, 125, 50, 0.7);
+        }
+
+        /* IMAGE SIDE - CIRCULAR */
+        .image-section {
+            flex: 1;
+            min-width: 320px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            
+            /* Initial state for pop animation */
+            opacity: 0;
+            transform: scale(0.8);
+            animation: popIn 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards; /* Delayed pop in */
+        }
+
+        .image-card {
+            position: relative;
+            width: 400px; /* Fixed width for perfect circle */
+            height: 400px; /* Fixed height equal to width */
+            border-radius: 50%; /* Makes it a circle */
+            overflow: hidden;
+            border: 8px solid rgba(255, 255, 255, 0.3); /* subtle border ring */
+            box-shadow: 0 30px 60px rgba(27, 94, 32, 0.25); /* Greenish shadow */
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* Ensures image fills the circle without stretching */
+            object-position: center top; /* Focus on the farmer's face/upper body */
+        }
+
+
+        /* ENTRANCE KEYFRAMES */
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 40px;
+            }
+            
+            .text-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .text-section p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .image-card {
+                width: 300px; /* Smaller circle on mobile */
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-container">
+        
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+
+        <div class="content-wrapper">
+            
+            <div class="text-section">
+                <h1>Smart Farming <br><span>Advisory System</span></h1>
+                <p>Empowering farmers with AI-driven insights. Instant crop diagnosis, weather updates, and expert advice right on your phone.</p>
+                <div class="cta-button-wrapper">
+                    <a href="#" class="cta-button">Get Started Now</a>
+                </div>
+            </div>
+
+            <div class="image-section">
+                <div class="image-card">
+                    <img src="brainstack/public/Gemini_Generated_Image_y7q5lhy7q5lhy7q5.png" alt="Smiling Farmer holding phone in field">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
