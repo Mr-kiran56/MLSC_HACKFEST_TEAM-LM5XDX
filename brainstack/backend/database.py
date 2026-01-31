@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from urllib.parse import quote_plus
-from backend.Config import settings
+from config import settings
 
 password = quote_plus(settings.password)
 
