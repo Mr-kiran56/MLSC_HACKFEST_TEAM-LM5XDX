@@ -5,7 +5,9 @@ import FarmerDetail from "./pages/farmerDetail"
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<VoiceAgent />} />
+      
+      <Route path="/" element={<FarmerDetail />} />
+      <Route path="/dashboard" element={<VoiceAgent />} />
     </Routes>
   );
 }

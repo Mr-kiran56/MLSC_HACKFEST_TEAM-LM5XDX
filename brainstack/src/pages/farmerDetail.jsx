@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './farmerDetail_stunning.css';
+import './farmerDetail.css';
 import { Language, TRANSLATIONS, LOCATIONS, SOIL_TYPES } from './farmerDetailConsonants.js';
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ function FarmerDetail() {
 
   useEffect(() => {
     if (currentStep === "dashboard") {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [currentStep, navigate]);
 
