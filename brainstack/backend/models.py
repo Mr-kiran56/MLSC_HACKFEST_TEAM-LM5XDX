@@ -20,7 +20,6 @@ class FarmerProfile(Base):
 
     current_crop = Column(String(50), nullable=True)
 
-    start_date = Column(Date, nullable=True)
     estimate_complete_date = Column(Date, nullable=True)
 
     weather_support_sms = Column(Boolean, default=True)

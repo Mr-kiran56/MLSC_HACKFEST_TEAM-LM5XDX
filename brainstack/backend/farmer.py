@@ -23,6 +23,8 @@ def create_farmer(farmer: FarmerCreate, db: Session = Depends(get_db)):
     return new_farmer
 
 
+
+
 @router.get("/farmers/{phone}", response_model=FarmerResponse)
 def get_farmer(phone: str, db: Session = Depends(get_db)):
     farmer = db.query(FarmerProfile).filter(

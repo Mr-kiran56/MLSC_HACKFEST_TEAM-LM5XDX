@@ -1,9 +1,3 @@
-#!/usr/bin/env python3
-"""
-PlantDoc Model Inference Script
-Usage: python load_and_predict.py <image_path>
-"""
-
 import torch
 import torch.nn as nn
 from torchvision import transforms, models
@@ -34,8 +28,8 @@ class PlantDocPredictor:
         self.model = self.model.to(self.device)
         self.model.eval()
         
-        print(f"✅ Model loaded! Classes: {self.num_classes}")
-        print(f"✅ Best Validation Accuracy: {checkpoint['best_val_acc']:.2f}%")
+        print(f" Model loaded! Classes: {self.num_classes}")
+        print(f" Best Validation Accuracy: {checkpoint['best_val_acc']:.2f}%")
         
         # Image preprocessing
         self.transform = transforms.Compose([
@@ -76,11 +70,11 @@ class PlantDocPredictor:
         
         results = self.predict(image_path)
         
-        print("🎯 Prediction Results:")
+        print(" Prediction Results:")
         print(f"\n🏆 Top Prediction: {results[0]['disease']}")
-        print(f"📊 Confidence: {results[0]['confidence']:.2f}%")
+        print(f" Confidence: {results[0]['confidence']:.2f}%")
         
-        print("\n📋 All Predictions:")
+        print("\n All Predictions:")
         for i, result in enumerate(results, 1):
             print(f"  {i}. {result['disease']}: {result['confidence']:.2f}%")
         
@@ -99,7 +93,7 @@ def main():
     image_path = sys.argv[1]
     
     if not Path(image_path).exists():
-        print(f"❌ Error: Image not found: {image_path}")
+        print(f" Error: Image not found: {image_path}")
         sys.exit(1)
     
     # Initialize predictor
@@ -111,4 +105,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-print("✅ Inference script created: load_and_predict.py")
+print(" Inference script created: load_and_predict.py")
