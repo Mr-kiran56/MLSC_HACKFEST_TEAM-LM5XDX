@@ -2,7 +2,6 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { GoogleGenAI, Modality } from '@google/genai';
 import { decode, decodeAudioData, createPcmBlob } from './utils/audio';
 import { Visualizer } from './components/Visualizer';
-import "./VoiceAgent"
 import { Link } from "react-router-dom";
 
 // Constants defined inline (no import needed)
@@ -333,7 +332,7 @@ const VoiceAgent = () => {
     setIsConnecting(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey:'AIzaSyB_AS7Vv1cStEeeFnKs3nE-_BpssumYtqM' });
+      const ai = new GoogleGenAI({ apiKey:'AIzaSyAzto3p17XgBpvHKMA-FN4muLVtcqc-Vtg' });
 
       if (!audioContextRef.current) {
         audioContextRef.current = {
@@ -474,7 +473,8 @@ const VoiceAgent = () => {
   const daysRemaining = calculateDaysRemaining();
 
   return (
-    <div className="min-h-screen bg-[#f8faf7] flex flex-col font-sans selection:bg-green-100 selection:text-green-900">
+  <div className="min-h-screen w-full bg-[#f8faf7] flex flex-col font-sans">
+
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -678,7 +678,7 @@ const VoiceAgent = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-xs font-bold text-slate-800 mb-2 block">{t.language}</label>
                   <select
@@ -703,7 +703,7 @@ const VoiceAgent = () => {
                     ))}
                   </select>
                 </div>
-              </div>
+              </div> */}
 
               <div className="space-y-3 pt-4">
                 <button
