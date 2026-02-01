@@ -332,7 +332,7 @@ const VoiceAgent = () => {
     setIsConnecting(true);
 
     try {
-      const ai = new GoogleGenAI({ apiKey:'AIzaSyAzto3p17XgBpvHKMA-FN4muLVtcqc-Vtg' });
+      const ai = new GoogleGenAI({ apiKey:'AIzaSyBVG_rKw4Thjo8EsyE7UUcOXIZGCSV7aFE' });
 
       if (!audioContextRef.current) {
         audioContextRef.current = {

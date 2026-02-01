@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import VoiceAgent from "./voiceAgent";
+import VoiceAgent from "./VoiceAgent";
 import FarmerDetail from "./pages/farmerDetail"
 
 function App() {
