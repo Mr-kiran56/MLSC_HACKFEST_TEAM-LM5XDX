@@ -1,93 +1,70 @@
+// localData.jsx
 
-export const getToken = () => {
-  try {
-    return localStorage.getItem("token");
-  } catch (error) {
-    console.error("Error getting token:", error);
-    return null;
-  }
+// Language related functions
+export const getSelectedLanguage = () => {
+  return localStorage.getItem('selectedLanguage') || 'en'; // Default to English
 };
 
-export const setToken = (token) => {
-  try {
-    if (token) {
-      localStorage.setItem("token", token);
+export const setSelectedLanguage = (language) => {
+  localStorage.setItem('selectedLanguage', language);
+  return language;
+};
+
+export const getTranslation = (key) => {
+  const lang = getSelectedLanguage();
+  
+  const translations = {
+    en: {
+      welcome: "Welcome",
+      title: "Kisan Mitra",
+      // Add more translations as needed
+    },
+    hi: {
+      welcome: "स्वागत है",
+      title: "किसान मित्र",
+      // Add more translations as needed
+    },
+    te: {
+      welcome: "స్వాగతం",
+      title: "కిసాన్ మిత్ర",
+      // Add more translations as needed
+    },
+    ta: {
+      welcome: "வரவேற்கிறோம்",
+      title: "கிசான் மித்திரா",
+      // Add more translations as needed
+    },
+    kn: {
+      welcome: "ಸ್ವಾಗತ",
+      title: "ಕಿಸಾನ್ ಮಿತ್ರ",
+      // Add more translations as needed
+    },
+    ml: {
+      welcome: "സ്വാഗതം",
+      title: "കിസാൻ മിത്ര",
+      // Add more translations as needed
     }
-  } catch (error) {
-    console.error("Error setting token:", error);
-  }
+  };
+  
+  return translations[lang]?.[key] || translations.en[key] || key;
 };
 
-export const removeToken = () => {
-  try {
-    localStorage.removeItem("token");
-  } catch (error) {
-    console.error("Error removing token:", error);
-  }
+// Farmer data related functions
+export const getFarmerData = () => {
+  const data = localStorage.getItem('farmerData');
+  return data ? JSON.parse(data) : null;
 };
 
-export const getUserId = () => {
-  try {
-    return localStorage.getItem("user_id");
-  } catch (error) {
-    console.error("Error getting user ID:", error);
-    return null;
-  }
+export const setFarmerData = (data) => {
+  localStorage.setItem('farmerData', JSON.stringify(data));
 };
 
-export const setUserId = (user_id) => {
-  try {
-    if (user_id) {
-      localStorage.setItem("user_id", user_id);
-    }
-  } catch (error) {
-    console.error("Error setting user ID:", error);
-  }
+export const clearFarmerData = () => {
+  localStorage.removeItem('farmerData');
 };
 
-export const removeUserId = () => {
-  try {
-    localStorage.removeItem("user_id");
-  } catch (error) {
-    console.error("Error removing user ID:", error);
-  }
+// Clear all app data
+export const clearAllData = () => {
+  localStorage.removeItem('selectedLanguage');
+  localStorage.removeItem('farmerData');
 };
-
-
-export const getSelectedlangugae = () => {
-  try {
-    return localStorage.getItem("setSelectedlangugae");
-  } catch (error) {
-    console.error("Error getting language:", error);
-    return null;
-  }
-};
-
-export const setSelectedlangugae = (language) => {
-  try {
-    if (language) {
-      localStorage.setItem("language", language);
-    }
-  } catch (error) {
-    console.error("Error setting language:", error);
-  }
-};
-
-export const removeSelectedlangugae = () => {
-  try {
-    localStorage.removeItem("language");
-  } catch (error) {
-    console.error("Error removing language:", error);
-  }
-};
-
-
-
-
-export const isAuthenticated = () => {
-  const token = getToken();
-  return token !== null && token !== undefined && token !== "";
-};
-
-
-

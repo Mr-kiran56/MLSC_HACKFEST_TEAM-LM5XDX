@@ -131,9 +131,11 @@ function FarmerDetail() {
                 key={language.lang}
                 className="language-btn"
                 onClick={() => handleLanguageSelect(language.lang)}
+                
                 aria-label={`Select ${language.name} language`}
                 type="button"
               >
+
                 <span className="lang-icon" aria-hidden="true">{language.icon}</span>
                 <span className="lang-name">{language.name}</span>
               </button>
